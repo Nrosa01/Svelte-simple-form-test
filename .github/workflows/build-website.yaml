@@ -41,6 +41,8 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          VITE_BASE: Svelte-simple-form-test
 
       - name: Upload compiled source
         uses: actions/upload-artifact@v2
