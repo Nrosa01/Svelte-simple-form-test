@@ -11,7 +11,8 @@
           <div class="flex justify-center">
             <Icon></Icon>
           </div>
-          <h3 class="text-2xl font-bold text-center">Join us</h3>
+          <h3 class="text-2xl font-bold text-center">LTS</h3>
+          <h6 class="text-s text-gray-500 font-semibold text-center">Long Term Suffering</h6>
           <form action="">
                  <FormLabel title={"Nombre"}></FormLabel>
                  <FormLabel title={"Email"}></FormLabel>
