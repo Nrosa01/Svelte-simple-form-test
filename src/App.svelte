@@ -1,5 +1,4 @@
 <script>
-  import Button from "./lib/Button.svelte";
   import FormLabel from "./lib/FormLabel.svelte";
   import LargeButton from "./lib/LargeButton.svelte";
   import Icon from "./lib/Icon.svelte";
@@ -8,7 +7,6 @@
   let email = "";
   let password = "";
   let confirmPassword = "";
-  let hasBeenClicked = false;
 
   function isEmpty(str) {
     return !str || 0 === str.length;
@@ -58,32 +56,32 @@
           <form action="">
                  <FormLabel title={"Nombre"} bind:value={name} bind:condition={isValidName}></FormLabel>
                   {#if !isValidName}
-                 <span class="text-xs text-red-400">El nombre debe contener al menos 4 caracteres</span>
+                 <span class="text-xs text-red-400 font-medium">El nombre debe contener al menos 4 caracteres</span>
                   {/if}
                  <FormLabel title={"Email"} bind:value={email} bind:condition={isValidEmail}></FormLabel>
                   {#if !isValidEmail}
-                 <span class="text-xs text-red-400">El correo debe ser de la forma  usuario@dominio.x</span>
+                 <span class="text-xs text-red-400 font-medium">El correo debe ser de la forma  usuario@dominio.x</span>
                   {/if}
                  <FormLabel title={"Contraseña"} bind:value={password} bind:condition={isValidPassword}></FormLabel>
                  {#if !isValidPassword || containsSpecialCharacters(password)}
                  <div class="inline-flex flex-col">
                   {#if !isValidPassword}
-                  <span class="text-xs text-red-400 font-medium">*La contraseña debe contener 8 caracteres, 1 letra mayúscula, 1 letra minúscula y 1 número</span>
+                  <span class="text-xs text-red-400 font-medium">La contraseña debe contener 8 caracteres, 1 letra mayúscula, 1 letra minúscula y 1 número</span>
                     {/if}
                   {#if containsSpecialCharacters(password)}
-                    <span class="text-xs text-red-400 font-medium">*La contraseña no puede contener caracteres especiales</span>
+                    <span class="text-xs text-red-400 font-medium">La contraseña no puede contener caracteres especiales</span>
                    {/if}
                   </div>
                   {/if}
                  <FormLabel title={"Confirmar Contraseña"} type={"password"} bind:value={confirmPassword} bind:condition={isValidConfirmPassword}></FormLabel>
                   {#if !isValidConfirmPassword}
-                  <span class="text-xs text-red-400 font-medium">Passwords must match</span>
+                  <span class="text-xs text-red-400 font-medium">Las contraseñas deben coincidir</span>
                   {/if}
                   <LargeButton on:click={handleSubmission}>Crear Cuenta</LargeButton>
                   <div class="mt-6 text-grey-dark">
-                      Already have an account?
+                      ¿Ya tienes una cuenta?
                       <a class="text-blue-600 hover:underline" href="#">
-                          Log in
+                          Iniciar sesión
                       </a>
               </div>
           </form>
