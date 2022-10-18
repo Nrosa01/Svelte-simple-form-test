@@ -6,7 +6,6 @@
   export let condition = false;
   let type = "password"
   let isVisible = false;
-  let icon = eye;
   let cNode;
 
   // Como type es estatico, hay que usar este hack
@@ -20,13 +19,11 @@
       if (isVisible)
       {
           type = "password";
-          icon = eye;
           typeAction(cNode);
       }
       else
       {
           type = "text";
-          icon = eye_slash;
           typeAction(cNode);
       }
 
@@ -50,9 +47,9 @@
           class="{condition ? conditionMetClass : conditionNotMetClass}" /> 
           
           <div class="absolute inset-y-0 right-0 flex items-center text-sm leading-5 py-1 mr-2 mt-2 z-10 scale-95 bg-white">
-            <button class="w-full h-full text-gray-500 focus:outline-none focus:text-gray-600 m-1 bg-white hover:bg-gray-200 hover:rounded-md duration-200"
+            <button type="button" class="w-full h-full text-gray-500 focus:outline-none focus:text-gray-600 m-1 bg-white hover:bg-gray-200 hover:rounded-md duration-200"
             on:click="{() => togglePasswordVisibility()}" href="#">
-              <img src="{icon}" alt="eye"/>
+              <img src="{isVisible ? eye : eye_slash}" alt="eye"/>
             </button>
           </div>
         </div>
