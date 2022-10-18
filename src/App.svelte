@@ -58,11 +58,12 @@
                   {#if !isValidName}
                  <span class="text-xs text-red-400 font-medium">El nombre debe contener al menos 4 caracteres</span>
                   {/if}
-                 <FormLabel title={"Email"} bind:value={email} bind:condition={isValidEmail}></FormLabel>
+                 <FormLabel title={"Email"} bind:value={email} bind:condition={isValidEmail}>
+                </FormLabel>
                   {#if !isValidEmail}
                  <span class="text-xs text-red-400 font-medium">El correo debe ser de la forma  usuario@dominio.x</span>
                   {/if}
-                 <FormLabel title={"Contraseña"} bind:value={password} bind:condition={isValidPassword}></FormLabel>
+                 <FormLabel title={"Contraseña"} type={"password"} bind:value={password} bind:condition={isValidPassword}></FormLabel>
                  {#if !isValidPassword || containsSpecialCharacters(password)}
                  <div class="inline-flex flex-col">
                   {#if !isValidPassword}
