@@ -4,7 +4,8 @@
   import LargeButton from "./lib/LargeButton.svelte";
   import Icon from "./lib/Icon.svelte";
   import Texts from "./assets/data/en.json";
-
+  import { slide } from 'svelte/transition';
+  
   let name = "";
   let email = "";
   let password = "";
@@ -58,27 +59,27 @@
           <form action="">
                  <FormLabel title={Texts["Name"]} bind:value={name} bind:condition={isValidName}></FormLabel>
                   {#if !isValidName}
-                 <span class="text-xs text-red-400 font-medium">{Texts["NameErrorLabel"]}</span>
+                 <div transition:slide class="text-xs text-red-400 font-medium">{Texts["NameErrorLabel"]}</div>
                   {/if}
                  <FormLabel title={Texts["Email"]} bind:value={email} bind:condition={isValidEmail}>
                 </FormLabel>
                   {#if !isValidEmail}
-                 <span class="text-xs text-red-400 font-medium">{Texts["EmailErrorLabel"]}</span>
+                 <div transition:slide class="text-xs text-red-400 font-medium">{Texts["EmailErrorLabel"]}</div>
                   {/if}
                  <PasswordLabel title={Texts["Password"]} bind:value={password} bind:condition={isValidPassword}></PasswordLabel>
                  {#if !isValidPassword || containsSpecialCharacters(password)}
                  <div class="inline-flex flex-col">
                   {#if !isValidPassword}
-                  <span class="text-xs text-red-400 font-medium">{Texts["PasswordErrorLabel"]}</span>
+                  <div transition:slide class="text-xs text-red-400 font-medium">{Texts["PasswordErrorLabel"]}</div>
                     {/if}
                   {#if containsSpecialCharacters(password)}
-                    <span class="text-xs text-red-400 font-medium">{Texts["NoSpecialCharacters"]}</span>
+                    <div transition:slide class="text-xs text-red-400 font-medium">{Texts["NoSpecialCharacters"]}</div>
                    {/if}
                   </div>
                   {/if}
                  <PasswordLabel title={"Confirmar Contraseña"} bind:value={confirmPassword} bind:condition={isValidConfirmPassword}></PasswordLabel>
                   {#if !isValidConfirmPassword}
-                  <span class="text-xs text-red-400 font-medium">{Texts["ConfirmPasswordErrorLabel"]}</span>
+                  <div transition:slide class="text-xs text-red-400 font-medium">{Texts["ConfirmPasswordErrorLabel"]}</div>
                   {/if}
                   <LargeButton on:click={handleSubmission}>{Texts["CreateAccount"]}</LargeButton>
                   <div class="mt-6 text-grey-dark">
