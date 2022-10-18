@@ -6,28 +6,17 @@
   export let condition = false;
   let type = "password"
   let isVisible = false;
-  let cNode;
   $: icon = `${isVisible ? eye : eye_slash}`
 
-  // Como type es estatico, hay que usar este hack
-  function typeAction(node) {
-        node.type = type;
-        cNode = node;
-    }
+  function setType() {
+    let inputField = document.getElementById("input");
+    inputField["type"] = type;
+  }
 
   function togglePasswordVisibility()
   {
-      if (isVisible)
-      {
-          type = "password";
-          typeAction(cNode);
-      }
-      else
-      {
-          type = "text";
-          typeAction(cNode);
-      }
-
+      type = `${isVisible ? "password" : "text"}`;
+      setType();
       isVisible = !isVisible;
   }
 
@@ -43,7 +32,8 @@
         <div class="relative">
           
           <input
-          use:typeAction
+          id="input"
+          type="password"
           placeholder="{title}"
           bind:value
           class="{classes}" /> 
