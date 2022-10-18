@@ -10,7 +10,7 @@
     }
 
     let conditionMetClass = "focus:ring-blue-600"
-    let conditionNotMetClass = "focus:ring-red-600"
+    let conditionNotMetClass = "border-red-600 focus:ring-transparent"
     $: classes = `w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 ${condition ? conditionMetClass :conditionNotMetClass}`
 </script>
 
