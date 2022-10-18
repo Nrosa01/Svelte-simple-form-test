@@ -1,5 +1,6 @@
 <script>
   import FormLabel from "./lib/FormLabel.svelte";
+  import PasswordLabel from "./lib/PasswordLabel.svelte";
   import LargeButton from "./lib/LargeButton.svelte";
   import Icon from "./lib/Icon.svelte";
   import Texts from "./assets/data/en.json";
@@ -64,7 +65,7 @@
                   {#if !isValidEmail}
                  <span class="text-xs text-red-400 font-medium">{Texts["EmailErrorLabel"]}</span>
                   {/if}
-                 <FormLabel title={Texts["Password"]} type={"password"} bind:value={password} bind:condition={isValidPassword}></FormLabel>
+                 <PasswordLabel title={Texts["Password"]} bind:value={password} bind:condition={isValidPassword}></PasswordLabel>
                  {#if !isValidPassword || containsSpecialCharacters(password)}
                  <div class="inline-flex flex-col">
                   {#if !isValidPassword}
@@ -75,7 +76,7 @@
                    {/if}
                   </div>
                   {/if}
-                 <FormLabel title={"Confirmar Contraseña"} type={"password"} bind:value={confirmPassword} bind:condition={isValidConfirmPassword}></FormLabel>
+                 <PasswordLabel title={"Confirmar Contraseña"} bind:value={confirmPassword} bind:condition={isValidConfirmPassword}></PasswordLabel>
                   {#if !isValidConfirmPassword}
                   <span class="text-xs text-red-400 font-medium">{Texts["ConfirmPasswordErrorLabel"]}</span>
                   {/if}

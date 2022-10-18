@@ -14,16 +14,13 @@
 </script>
 
 <div class="mt-4">
-<div>
-  <label class="block" for={title}
-    >{title}<label>
-      <input
-        use:typeAction
-        placeholder={title}
-        bind:value={value}
-        class={condition ? conditionMetClass : conditionNotMetClass}
-      />
-    </label></label
-  >
-</div>
+  <div>
+    <label class="block" for="{title}"
+      >{title}<label>
+        <input
+          use:typeAction
+          placeholder="{title}"
+          bind:value
+          class="{condition ? conditionMetClass : conditionNotMetClass}" />
+  </div>
 </div>

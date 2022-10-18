@@ -10,3 +10,4 @@ Characteristics:
 - Input fields are validate in realtime using Svelte's reactive statements.
 - If form is valid en alert is shown on submit.
 - Login button doesn't do anything, it's just a button.
+- Toggle password visibility button.
