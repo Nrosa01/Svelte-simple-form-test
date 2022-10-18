@@ -1,0 +1,16 @@
+{
+    "Tittle": "LTS",
+    "Description": "Long Term Suffering",
+    "Name": "Nombre",
+    "Email": "Email",
+    "Password": "Contraseña",
+    "Confirm Password": "Confirmar Contraseña",
+    "CreateAccount": "Crear Cuenta",
+    "Login": "Iniciar Sesión",
+    "Already have an account?": "¿Ya tienes una cuenta?",
+    "NameErrorLabel": "El nombre debe contener al menos 4 caracteres",
+    "EmailErrorLabel": "El coreo debe ser de la forma usuario@dominio.x",
+    "PasswordErrorLabel": "La contraseña debe contener 8 caracteres, 1 letra mayúscula, 1 letra minúscula y 1 número",
+    "NoSpecialCharacters": "La contraseña no puede contener caracteres especiales",
+    "ConfirmPasswordErrorLabel": "Las contraseñas no coinciden"
+}

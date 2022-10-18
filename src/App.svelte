@@ -2,6 +2,7 @@
   import FormLabel from "./lib/FormLabel.svelte";
   import LargeButton from "./lib/LargeButton.svelte";
   import Icon from "./lib/Icon.svelte";
+  import Texts from "./assets/data/en.json";
 
   let name = "";
   let email = "";
@@ -54,35 +55,35 @@
           <h3 class="text-2xl font-bold text-center">LTS</h3>
           <h6 class="text-s text-gray-500 font-semibold text-center">Long Term Suffering</h6>
           <form action="">
-                 <FormLabel title={"Nombre"} bind:value={name} bind:condition={isValidName}></FormLabel>
+                 <FormLabel title={Texts["Name"]} bind:value={name} bind:condition={isValidName}></FormLabel>
                   {#if !isValidName}
-                 <span class="text-xs text-red-400 font-medium">El nombre debe contener al menos 4 caracteres</span>
+                 <span class="text-xs text-red-400 font-medium">{Texts["NameErrorLabel"]}</span>
                   {/if}
-                 <FormLabel title={"Email"} bind:value={email} bind:condition={isValidEmail}>
+                 <FormLabel title={Texts["Email"]} bind:value={email} bind:condition={isValidEmail}>
                 </FormLabel>
                   {#if !isValidEmail}
-                 <span class="text-xs text-red-400 font-medium">El correo debe ser de la forma  usuario@dominio.x</span>
+                 <span class="text-xs text-red-400 font-medium">{Texts["EmailErrorLabel"]}</span>
                   {/if}
-                 <FormLabel title={"Contraseña"} type={"password"} bind:value={password} bind:condition={isValidPassword}></FormLabel>
+                 <FormLabel title={Texts["Password"]} type={"password"} bind:value={password} bind:condition={isValidPassword}></FormLabel>
                  {#if !isValidPassword || containsSpecialCharacters(password)}
                  <div class="inline-flex flex-col">
                   {#if !isValidPassword}
-                  <span class="text-xs text-red-400 font-medium">La contraseña debe contener 8 caracteres, 1 letra mayúscula, 1 letra minúscula y 1 número</span>
+                  <span class="text-xs text-red-400 font-medium">{Texts["PasswordErrorLabel"]}</span>
                     {/if}
                   {#if containsSpecialCharacters(password)}
-                    <span class="text-xs text-red-400 font-medium">La contraseña no puede contener caracteres especiales</span>
+                    <span class="text-xs text-red-400 font-medium">{Texts["NoSpecialCharacters"]}</span>
                    {/if}
                   </div>
                   {/if}
                  <FormLabel title={"Confirmar Contraseña"} type={"password"} bind:value={confirmPassword} bind:condition={isValidConfirmPassword}></FormLabel>
                   {#if !isValidConfirmPassword}
-                  <span class="text-xs text-red-400 font-medium">Las contraseñas deben coincidir</span>
+                  <span class="text-xs text-red-400 font-medium">{Texts["ConfirmPasswordErrorLabel"]}</span>
                   {/if}
-                  <LargeButton on:click={handleSubmission}>Crear Cuenta</LargeButton>
+                  <LargeButton on:click={handleSubmission}>{Texts["CreateAccount"]}</LargeButton>
                   <div class="mt-6 text-grey-dark">
-                      ¿Ya tienes una cuenta?
+                      {Texts["Already have an account?"]}
                       <a class="text-blue-600 hover:underline" href="#">
-                          Iniciar sesión
+                          {Texts["Login"]}
                       </a>
               </div>
           </form>
