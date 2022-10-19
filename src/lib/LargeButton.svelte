@@ -8,6 +8,26 @@
     let canClickButtonClass = "bg-green-600"
     let cantClickButtonClass = "bg-blue-600"
     let funnyModeClass = `${!funnyMode ? "w-full" : ""}`
+    
+    // Functions to move the button
+    
+    let getDivWidth = () => parseInt(window.getComputedStyle(document.getElementById("div"), null).width)
+    let getButtonWidth = () => parseInt(window.getComputedStyle(document.getElementById("button"), null).width)
+    let getButton = () => document.getElementById("button")
+    
+    let pixelsToPercentage = (pixels) => (pixels / getDivWidth()) * 100;
+    let correctPosition = (threshold) => Math.abs(newPos - currentPos) >= threshold;
+    let findNewPosition = () => newPos = Math.floor(Math.random() * 100) - 50;
+    let clampPosition = () =>
+    {
+        let maxRight = pixelsToPercentage( getDivWidth()/2  - (getButtonWidth()/2))
+        let maxLeft = pixelsToPercentage(- getDivWidth()/2 + (getButtonWidth()/2))
+
+        newPos = Math.min(Math.max(newPos, maxLeft), maxRight);
+    }
+    let setPosition = () => getButton().style.left = `${newPos}%`;
+
+    // Listener to move the button on windows resize
 
     window.addEventListener('resize', function(event) {
         onResize();
@@ -20,54 +40,23 @@
         if(!funnyMode)
             return;
 
-        let button = document.getElementById("button");
-        let div = document.getElementById("div");
-        let cssButton = window.getComputedStyle(button, null);
-        let cssDiv = window.getComputedStyle(div, null);
-
+        // Save last pos
         currentPos = newPos;
-        //newpos must bet -50 50
-        newPos = Math.floor(Math.random() * 100) - 50;
 
-        while (Math.abs(newPos - currentPos) < 25)
-            newPos = Math.floor(Math.random() * 100) - 50;
-
-        if(canBeClicked)
-            newPos = 0;
-
-        let buttonWidth = parseInt(cssButton.width);     
-        let divWidth = parseInt(cssDiv.width);
-
-        let pixelsToPercentage = (pixels) => (pixels / divWidth) * 100;
-
-        let maxRight = pixelsToPercentage(divWidth/2  - (buttonWidth/2))
-        let maxLeft = pixelsToPercentage(-divWidth/2 + (buttonWidth/2))
-
-        //Clamp newpos between maxRight and maxLeft
-        newPos = Math.min(Math.max(newPos, maxLeft), maxRight);
+        let counter = 100;
+        do
+        {
+            findNewPosition();
+            clampPosition();
+            counter--;
+        } while(!correctPosition(25) && counter > 0)
         
-        button.style.left = `${newPos}%`;
+        setPosition();
     }
 
     function onResize()
     {
-        let button = document.getElementById("button");
-        let div = document.getElementById("div");
-        let cssButton = window.getComputedStyle(button, null);
-        let cssDiv = window.getComputedStyle(div, null);
-
-        let buttonWidth = parseInt(cssButton.width);     
-        let divWidth = parseInt(cssDiv.width);
-
-        let pixelsToPercentage = (pixels) => (pixels / divWidth) * 100;
-
-        let maxRight = pixelsToPercentage(divWidth/2  - (buttonWidth/2))
-        let maxLeft = pixelsToPercentage(-divWidth/2 + (buttonWidth/2))
-
-        //Clamp newpos between maxRight and maxLeft
-        newPos = Math.min(Math.max(newPos, maxLeft), maxRight);
-        
-        button.style.left = `${newPos}%`;
+        clampPosition();
     }
 
     function onFocus()
