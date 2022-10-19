@@ -6,18 +6,13 @@
   export let condition = false;
   let type = "password"
   let isVisible = false;
-  $:id = "input" + title;
+  let inputField;
   $: icon = `${isVisible ? eye : eye_slash}`
-
-  function setType() {
-    let inputField = document.getElementById(id);
-    inputField["type"] = type;
-  }
 
   function togglePasswordVisibility()
   {
       type = `${isVisible ? "password" : "text"}`;
-      setType();
+      inputField.type = type;
       isVisible = !isVisible;
   }
 
@@ -33,7 +28,7 @@
         <div class="relative">
           
           <input
-          id={id}
+          bind:this="{inputField}"
           type="password"
           placeholder="{title}"
           bind:value

@@ -9,11 +9,15 @@
     let cantClickButtonClass = "bg-blue-600"
     let funnyModeClass = `${!funnyMode ? "w-full" : ""}`
     
+    $: classes = `${buttonClassBase} ${canBeClicked ? canClickButtonClass : cantClickButtonClass} ${funnyModeClass}`
+
+    let div;
+    let button;
+
     // Functions to move the button
     
-    let getDivWidth = () => parseInt(window.getComputedStyle(document.getElementById("div"), null).width)
-    let getButtonWidth = () => parseInt(window.getComputedStyle(document.getElementById("button"), null).width)
-    let getButton = () => document.getElementById("button")
+    let getDivWidth = () => parseInt(window.getComputedStyle(div, null).width)
+    let getButtonWidth = () => parseInt(window.getComputedStyle(button, null).width)
     
     let pixelsToPercentage = (pixels) => (pixels / getDivWidth()) * 100;
     let correctPosition = (threshold) => Math.abs(newPos - currentPos) >= threshold;
@@ -25,15 +29,12 @@
 
         newPos = Math.min(Math.max(newPos, maxLeft), maxRight);
     }
-    let setPosition = () => getButton().style.left = `${newPos}%`;
-
+    
     // Listener to move the button on windows resize
-
     window.addEventListener('resize', function(event) {
         onResize();
     }, true);
 
-    $: classes = `${buttonClassBase} ${canBeClicked ? canClickButtonClass : cantClickButtonClass} ${funnyModeClass}`
 
     function move()
     {
@@ -50,8 +51,6 @@
             clampPosition();
             counter--;
         } while(!correctPosition(25) && counter > 0)
-        
-        setPosition();
     }
 
     function onResize()
@@ -67,8 +66,8 @@
     }
 </script>
 
-<div id="div" class="flex justify-center">
-    <button id="button" class="{classes}"
+<div bind:this="{div}" class="flex justify-center">
+    <button bind:this="{button}" class="{classes}"
     style='transition: left 0.25s ease-in-out; left: {canBeClicked ? 0 : newPos}%;'
     type="button" on:click on:mouseenter="{() => move()}" on:focus="{() => onFocus()}">
     <slot></slot>
