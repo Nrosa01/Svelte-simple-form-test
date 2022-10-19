@@ -46,6 +46,8 @@
   $: isValidEmail = validateEmail(email) || isEmpty(email);
   $: isValidPassword = isPassword(password) || isEmpty(password);
   $: isValidConfirmPassword = isPasswordMatch(password, confirmPassword) || isEmpty(confirmPassword);
+  $: fieldsNotEmpty = !isEmpty(name) && !isEmpty(email) && !isEmpty(password) && !isEmpty(confirmPassword);
+  $: isFormValid = isValidName && isValidEmail && isValidPassword && isValidConfirmPassword && fieldsNotEmpty;
 </script>
 
 <main>
@@ -81,7 +83,7 @@
                   {#if !isValidConfirmPassword}
                   <div transition:slide class="text-xs text-red-400 font-medium">{Texts["ConfirmPasswordErrorLabel"]}</div>
                   {/if}
-                  <LargeButton on:click={handleSubmission}>{Texts["CreateAccount"]}</LargeButton>
+                    <LargeButton bind:canBeClicked={isFormValid} on:click={handleSubmission}>{Texts["CreateAccount"]}</LargeButton>
                   <div class="mt-6 text-grey-dark">
                       {Texts["Already have an account?"]}
                       <a class="text-blue-600 hover:underline" href="#">
