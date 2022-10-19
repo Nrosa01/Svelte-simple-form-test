@@ -35,7 +35,7 @@
           class="{classes}" /> 
           
           <div class="absolute inset-y-0 right-0 flex items-center text-sm leading-5 py-1 mr-2 mt-2 z-10 scale-95 bg-white">
-            <button type="button" class="w-full h-full text-gray-500 focus:outline-none focus:text-gray-600 m-1 bg-white hover:bg-gray-200 hover:rounded-md duration-200"
+            <button tabindex="-1" type="button" class="w-full h-full text-gray-500 focus:outline-none focus:text-gray-600 m-1 bg-white hover:bg-gray-200 hover:rounded-md duration-200"
             on:click="{() => togglePasswordVisibility()}" href="#">
               <img src="{icon}" alt="eye"/>
             </button>
