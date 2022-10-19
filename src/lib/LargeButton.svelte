@@ -9,6 +9,10 @@
     let cantClickButtonClass = "bg-blue-600"
     let funnyModeClass = `${!funnyMode ? "w-full" : ""}`
 
+    window.addEventListener('resize', function(event) {
+        onResize();
+    }, true);
+
     $: classes = `${buttonClassBase} ${canBeClicked ? canClickButtonClass : cantClickButtonClass} ${funnyModeClass}`
 
     function move()
@@ -17,8 +21,8 @@
             return;
 
         let button = document.getElementById("button");
-        let cssButton = window.getComputedStyle(button, null);
         let div = document.getElementById("div");
+        let cssButton = window.getComputedStyle(button, null);
         let cssDiv = window.getComputedStyle(div, null);
 
         currentPos = newPos;
@@ -34,15 +38,35 @@
         let buttonWidth = parseInt(cssButton.width);     
         let divWidth = parseInt(cssDiv.width);
 
-        //lambda function to convert pixels to percentage
         let pixelsToPercentage = (pixels) => (pixels / divWidth) * 100;
-        let percentageToPixels = (percentage) => (percentage / 100) * divWidth;
 
         let maxRight = pixelsToPercentage(divWidth/2  - (buttonWidth/2))
         let maxLeft = pixelsToPercentage(-divWidth/2 + (buttonWidth/2))
 
         //Clamp newpos between maxRight and maxLeft
         newPos = Math.min(Math.max(newPos, maxLeft), maxRight);
+        
+        button.style.left = `${newPos}%`;
+    }
+
+    function onResize()
+    {
+        let button = document.getElementById("button");
+        let div = document.getElementById("div");
+        let cssButton = window.getComputedStyle(button, null);
+        let cssDiv = window.getComputedStyle(div, null);
+
+        let buttonWidth = parseInt(cssButton.width);     
+        let divWidth = parseInt(cssDiv.width);
+
+        let pixelsToPercentage = (pixels) => (pixels / divWidth) * 100;
+
+        let maxRight = pixelsToPercentage(divWidth/2  - (buttonWidth/2))
+        let maxLeft = pixelsToPercentage(-divWidth/2 + (buttonWidth/2))
+
+        //Clamp newpos between maxRight and maxLeft
+        newPos = Math.min(Math.max(newPos, maxLeft), maxRight);
+        
         button.style.left = `${newPos}%`;
     }
 
