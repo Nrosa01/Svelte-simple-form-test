@@ -1,7 +1,7 @@
 <script>
     export let canBeClicked = false;
 
-    let funnyMode = false;
+    let funnyMode = true;
     let currentPos = 0;
     let newPos = 0;
     let buttonClassBase = "relative w-full:funnyMode px-6 py-2 mt-4 text-white rounded-lg hover:bg-blue-900";

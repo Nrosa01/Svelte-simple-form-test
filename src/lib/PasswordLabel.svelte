@@ -6,10 +6,11 @@
   export let condition = false;
   let type = "password"
   let isVisible = false;
+  $:id = "input" + title;
   $: icon = `${isVisible ? eye : eye_slash}`
 
   function setType() {
-    let inputField = document.getElementById("input");
+    let inputField = document.getElementById(id);
     inputField["type"] = type;
   }
 
@@ -32,7 +33,7 @@
         <div class="relative">
           
           <input
-          id="input"
+          id={id}
           type="password"
           placeholder="{title}"
           bind:value
