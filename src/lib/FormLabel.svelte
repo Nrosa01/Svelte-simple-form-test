@@ -3,6 +3,7 @@
   export let value = "";
   export let condition = false;
   export let type = "text"
+  export let ref = null;
 
   // Como type es estatico, hay que usar este hack
   function typeAction(node) {
@@ -19,6 +20,7 @@
     <label class="block" for="{title}"
       >{title}<label>
         <input
+          bind:this="{ref}"
           use:typeAction
           placeholder="{title}"
           bind:value

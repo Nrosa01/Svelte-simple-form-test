@@ -5,6 +5,7 @@
   import Icon from "./lib/Icon.svelte";
   import Texts from "./assets/data/en.json";
   import { slide } from 'svelte/transition';
+  import { onMount } from "svelte";
   
   let name = "";
   let email = "";
@@ -48,6 +49,12 @@
   $: isValidConfirmPassword = isPasswordMatch(password, confirmPassword) || isEmpty(confirmPassword);
   $: fieldsNotEmpty = !isEmpty(name) && !isEmpty(email) && !isEmpty(password) && !isEmpty(confirmPassword);
   $: isFormValid = isValidName && isValidEmail && isValidPassword && isValidConfirmPassword && fieldsNotEmpty;
+
+  let inputRef;
+
+  onMount(() => {
+    inputRef.focus();
+  });
 </script>
 
 <main>
@@ -59,7 +66,7 @@
           <h3 class="text-2xl font-bold text-center">LTS</h3>
           <h6 class="text-s text-gray-500 font-semibold text-center">Long Term Suffering</h6>
           <form action="">
-                 <FormLabel title={Texts["Name"]} bind:value={name} bind:condition={isValidName}></FormLabel>
+                 <FormLabel bind:ref={inputRef} title={Texts["Name"]} bind:value={name} bind:condition={isValidName}></FormLabel>
                   {#if !isValidName}
                  <div transition:slide class="text-xs text-red-400 font-medium">{Texts["NameErrorLabel"]}</div>
                   {/if}
