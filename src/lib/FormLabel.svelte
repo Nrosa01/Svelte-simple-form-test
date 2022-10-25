@@ -1,18 +1,29 @@
 <script>
+  import { onMount } from "svelte";
+
   export let title;
   export let value = "";
   export let condition = false;
-  export let type = "text"
-  export let ref = null;
+  export let type = "text";
+  export let focused = false;
+  let ref = null;
+
+  onMount(() => {
+    if (focused) {
+      ref.focus();
+    }
+  });
 
   // Como type es estatico, hay que usar este hack
   function typeAction(node) {
-        node.type = type;
-    }
+    node.type = type;
+  }
 
-    let conditionMetClass = "focus:ring-blue-600"
-    let conditionNotMetClass = "border-red-600 focus:ring-transparent"
-    $: classes = `w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 ${condition ? conditionMetClass :conditionNotMetClass}`
+  let conditionMetClass = "focus:ring-blue-600";
+  let conditionNotMetClass = "border-red-600 focus:ring-transparent";
+  $: classes = `w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 ${
+    condition ? conditionMetClass : conditionNotMetClass
+  }`;
 </script>
 
 <div class="mt-4">
@@ -25,5 +36,6 @@
           placeholder="{title}"
           bind:value
           class="{classes}" />
+      </label></label>
   </div>
 </div>
